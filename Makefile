@@ -6,7 +6,7 @@ CXXFLAGS := -std=c++20 -Wall -Wextra -Wpedantic -Werror -O3 -g \
 # add file here (src/filename.cpp) if it should also be linked
 SRC  := src/main.cpp src/io.cpp src/compute.cpp
 OBJ  := $(SRC:.cpp=.o)
-BIN  := simpaths
+BIN  := main
 
 all: $(BIN)
 
