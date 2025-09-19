@@ -1,0 +1,8 @@
+#include <iostream>
+#include <vector>
+
+namespace compute
+{
+    std::vector<float> discrete_random_walk(const int &path_length, const float &sigma);
+    
+}
