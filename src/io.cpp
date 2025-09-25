@@ -24,16 +24,17 @@ namespace IO {
         }
     }
 
-    int writeCsv(std::vector<float> const &values){
-        std::ofstream file("data/output.csv");
+    int writeCsv(const std::vector<float>& values, const std::string& filename) {
+        std::string final_location = "data/" + filename + ".csv";
+        std::ofstream file(final_location);   // use dynamic filename
         if (!file.is_open()) {
-            return 0;
+            return 0; 
         }
 
         file << "Index,Value\n";
         for (std::size_t i = 0; i < values.size(); ++i) {
             file << i << "," << values[i] << "\n";
         }
-        return 1;
+        return 1; 
     }
 }

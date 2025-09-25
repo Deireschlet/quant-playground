@@ -4,5 +4,5 @@
 
 namespace  IO {
     void readParameters(int &path_length, float &sigma);
-    int writeCsv(std::vector<float> const &values);
+    int writeCsv(const std::vector<float>& values, const std::string& filename);
 }
