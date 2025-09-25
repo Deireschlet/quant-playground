@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 #include "io.hpp"
 #include "compute.hpp"
@@ -12,8 +13,11 @@ int main() {
     IO::readParameters(path_length, sigma);
     std::vector<float> random_walk = compute::discrete_random_walk(path_length, sigma);
 
-    for(auto& step : random_walk){
-        std::cout << step << '\n';
+    if(IO::writeCsv(random_walk)){
+        std::cout << "Csv file ready" << std::endl;
+    }
+    else{
+        std::cout << "Something went wrong" << std::endl;
     }
 
     return 0;

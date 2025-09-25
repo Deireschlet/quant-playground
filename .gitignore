@@ -46,3 +46,14 @@
 
 # Executables
 main
+
+# data files
+data
+*.csv
+*.tsv
+
+# python related files
+__pycache__/
+*.ipynb
+.venv/
+*.py

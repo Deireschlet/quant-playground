@@ -1,3 +1,4 @@
+#include <fstream>
 #include <iostream>
 #include <io.hpp>
 
@@ -21,5 +22,18 @@ namespace IO {
                 break;
             }
         }
+    }
+
+    int writeCsv(std::vector<float> const &values){
+        std::ofstream file("data/output.csv");
+        if (!file.is_open()) {
+            return 0;
+        }
+
+        file << "Index,Value\n";
+        for (std::size_t i = 0; i < values.size(); ++i) {
+            file << i << "," << values[i] << "\n";
+        }
+        return 1;
     }
 }
