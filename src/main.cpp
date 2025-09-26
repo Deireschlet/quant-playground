@@ -6,33 +6,29 @@
 #include "compute.hpp"
 
 int main() {
-    int path_length;
-    float sigma;
+    int path_length{100000};
+    float sigma{0.35};
 
 
-    IO::readParameters(path_length, sigma);
+    // IO::readParameters(path_length, sigma);
     std::vector<float> random_walk = compute::discrete_random_walk(path_length, sigma);
     std::vector<float> wiener = compute::wienerProcess(1.0, path_length);
-    std::vector<float> gbm = compute::GBM(1, 1.2, 0.45, path_length, 1.0); 
+    std::vector<float> gbm = compute::GBM(1, 0.05, 0.2, path_length, 1.0);
+    std::vector<float> jump_diff = compute::jump_diffusion(1, 0.05, 0.2, path_length, 1.0, 0.5);
 
-    if(IO::writeCsv(random_walk, "random_walk")){
-        std::cout << "Csv file ready" << std::endl;
+    try {
+        IO::writeCsv(random_walk, "random_walk");
+        IO::writeCsv(wiener, "wiener_process");
+        IO::writeCsv(gbm, "gbm");
+        IO::writeCsv(jump_diff, "jump_diff");
     }
-    else{
-        std::cout << "Something went wrong" << std::endl;
+    catch (const std::exception& e) {
+        // Handles standard exceptions
+        std::cerr << "Error: " << e.what() << '\n';
     }
-
-    if(IO::writeCsv(wiener, "wiener_process")){
-        std::cout << "Csv file ready" << std::endl;
-    }
-    else{
-        std::cout << "Something went wrong" << std::endl;
-    }
-    if(IO::writeCsv(gbm, "gbm")){
-        std::cout << "Csv file ready" << std::endl;
-    }
-    else{
-        std::cout << "Something went wrong" << std::endl;
+    catch (...) {
+        // Handles any other type of exception
+        std::cerr << "Unknown error occurred\n";
     }
 
 

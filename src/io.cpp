@@ -1,6 +1,7 @@
 #include <fstream>
 #include <iostream>
 #include <io.hpp>
+#include <stdexcept>
 
 
 using std::cout;
@@ -24,17 +25,18 @@ namespace IO {
         }
     }
 
-    int writeCsv(const std::vector<float>& values, const std::string& filename) {
-        std::string final_location = "data/" + filename + ".csv";
-        std::ofstream file(final_location);   // use dynamic filename
+    void writeCsv(const std::vector<float>& values, const std::string& filename) {
+        std::string file_location = "data/" + filename + ".csv";
+        std::ofstream file(file_location);  
+        
         if (!file.is_open()) {
-            return 0; 
+            throw std::runtime_error("Could not open file: " + file_location); 
         }
 
         file << "Index,Value\n";
         for (std::size_t i = 0; i < values.size(); ++i) {
             file << i << "," << values[i] << "\n";
         }
-        return 1; 
+        std::cout << file_location << " created\n"; 
     }
 }
