@@ -54,6 +54,6 @@ data
 
 # python related files
 __pycache__/
-*.ipynb
 .venv/
-*.py
+.env
+
